@@ -1,0 +1,23 @@
+{
+  "name": "vue-chat-backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npx babel-node ./bin/www",
+    "stub": "npx babel-node ./factory/Generator",
+    "app": "npx babel-node ./app"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "mongoose": "^5.0.13",
+    "morgan": "~1.9.0",
+    "socket.io": "^2.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
+}
