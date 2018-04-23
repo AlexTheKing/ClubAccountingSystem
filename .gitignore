@@ -6,3 +6,10 @@ vue-chat-backend/.idea/runConfigurations/bin_www.xml
 vue-chat-backend/.idea/modules.xml
 vue-chat-backend/.idea/misc.xml
 vue-chat-backend/.idea/jsLibraryMappings.xml
+node_modules
+vue-chat-backend/.idea/
+.idea/workspace.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/ClubAccountingSystem.iml
+.idea/vcs.xml
