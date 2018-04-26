@@ -10,6 +10,7 @@ import indexRouter from './routes/index';
 
 import MessageEventHandler from './event/MessageEventHandler';
 import UserEventHandler from './event/UserEventHandler';
+import { ConnectionService } from "./service/ConnectionService";
 
 const app = express();
 const server = http.createServer(app);
@@ -28,6 +29,7 @@ mongoose.connect(`mongodb://localhost/chat-app`).then(() => {
 
 io.on('connection', function (socket) {
     console.log('New user connected');
+    ConnectionService.add(socket);
     const messageEventHandler = new MessageEventHandler(socket);
     const userEventHandler = new UserEventHandler(socket);
     messageEventHandler.registerEvents();

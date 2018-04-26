@@ -1,6 +1,7 @@
 import MessageEvents from '../constants/MessageEvents';
 import { MessageService } from '../service/MessageService';
-import { AuthenticationService } from "../service/AuthenticationService";
+import { AuthorizationService } from "../service/AuthorizationService";
+import { ConnectionService } from "../service/ConnectionService";
 
 class MessageEventHandler {
     constructor(socket) {
@@ -14,10 +15,10 @@ class MessageEventHandler {
 
     registerOnNewMessage() {
         this.socket.on(MessageEvents.NEW_MESSAGE, data => {
-            AuthenticationService.checkAuthentication(data).then((user) => {
+            AuthorizationService.checkAuthentication(data).then((user) => {
                 data.user_id = user.id;
                 MessageService.create(data);
-                this.socket.emit(MessageEvents.UPDATE_MESSAGES_FOR_ROOM, data.room_id);
+                ConnectionService.broadcast(MessageEvents.UPDATE_MESSAGES_FOR_ROOM, data.room_id);
             }).catch((err) => {
                 console.log(err);
             })
@@ -26,7 +27,7 @@ class MessageEventHandler {
 
     registerOnGetAllMessagesForRoom() {
         this.socket.on(MessageEvents.GET_ALL_MESSAGES_FOR_ROOM_REQUEST, data => {
-            AuthenticationService.checkAuthentication(data).then(() => {
+            AuthorizationService.checkAuthentication(data).then(() => {
                 MessageService.findByRoom(data.room_id).then(messages => {
                     const messagesToSend = [];
                     for (const message of messages) {

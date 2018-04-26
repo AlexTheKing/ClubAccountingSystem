@@ -45,7 +45,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .chat-messages {
-    margin: 12px;
     background-color: rgb(250, 250, 250);
     max-height: 400px;
     overflow-x: hidden;

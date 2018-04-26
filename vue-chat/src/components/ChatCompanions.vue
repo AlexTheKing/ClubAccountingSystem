@@ -38,13 +38,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
  .chat-companions {
-   margin: 12px;
+   background-color: white;
  }
  ul {
    list-style-type: none;
    display: flex;
    flex-direction: column;
-   padding-left: 0;
+   padding: 0 12px;
  }
   .line-between {
     border-bottom: 1px solid rgba(105, 105, 105, 0.2);

@@ -31,8 +31,9 @@ export default {
     background-color: rgb(250, 250, 250);
     border: none;
     height: 50px;
-    width: 100%;
-    margin: 0 12px;
     padding: 0 12px;
+    box-sizing : border-box;
+    max-width: 100%;
+    min-width: 100%;
   }
 </style>
