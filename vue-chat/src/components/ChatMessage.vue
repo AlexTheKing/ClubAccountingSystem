@@ -7,8 +7,7 @@
         {{name}}
       </div>
       <div class="chat-message-data"
-           v-bind:class="{ 'chat-message-user-data' : isUser, 'chat-message-companion-data' : !isUser}">
-        {{data}}
+           v-bind:class="{ 'chat-message-user-data' : isUser, 'chat-message-companion-data' : !isUser}" v-html="dataEsc">
       </div>
     </div>
   </li>
@@ -22,8 +21,43 @@ export default {
   props: ['name', 'data'],
   data () {
     return {
-      isUser: this.name === UserService.user.name
+      isUser: this.name === UserService.user.name,
+      dataEsc: ''
     };
+  },
+  beforeMount () {
+    let entityMap = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+      '/': '&#x2F;',
+      '`': '&#x60;',
+      '=': '&#x3D;'
+    };
+    // eslint-disable-next-line
+    this.dataEsc = this.data.replace(/[&<>"'`=\/]/g, function (s) {
+      return entityMap[s];
+    });
+
+    let emojis = {
+      ':smile:': '😃',
+      ':grinning:': '😁',
+      ':face_with_tears:': '😂',
+      ':smiling_eyes:': '😊',
+      ':tongue_face:': '😋',
+      ':relieved:': '😌',
+      ':smirking:': '😏',
+      ':pensive:': '😔',
+      ':kiss:': '😘',
+      ':angry:': '😠',
+      ':crying:': '😢'
+    };
+
+    for (let key in emojis) {
+      this.dataEsc = this.dataEsc.replace(key, emojis[key]);
+    }
   }
 };
 </script>
